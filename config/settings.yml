@@ -4,7 +4,7 @@ plugins:
   ldap_user_create_mode:
     default: 'auto'
   ldap_hostname:
-    default: 'cpw.sonofrio.com'
+    default: 'forum.sonofrio.com'
   ldap_port:
     default: 389
   ldap_method:
