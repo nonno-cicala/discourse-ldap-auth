@@ -26,6 +26,17 @@ none   | Fail auth if the user account does not already exist.  This is a good o
 
 *list* also allows the specifying of *User Groups*, which will be automatically assigned to the user on creation.  It also allows specifying a different *username* (for local account) and *name* for the Discourse User Account than what is returned in the LDAP entry.
 
+## Yet Another Note on the _Attribute to lookup users by_ Setting
+
+The _Lookup Users By Attribute_ setting specifies how to to link the LDAP response entry to a user within _Discourse_. By
+default, it uses the _email_ attribute in the LDAP entry to try and find an existing Discourse user. If email address is
+unlikely to change for a given user, it is a good idea to keep this default setting.
+
+If, on the other hand, LDAP email address has the possibility of changing, setting _Attribute to lookup users by_ to _username_ is the way to go to avoid "de-linking"
+the Discourse User from its corresponding LDAP entry.
+
+The only possible values are _email_ or _username_.
+
 ## Other Tips
 
 When disabling Local Login and other authentication services, clicking the `Login` or `Sign Up` button will directly bring up the LDAP Login popup.
@@ -34,7 +45,21 @@ When disabling Local Login and other authentication services, clicking the `Logi
 
 ![LDAP Login Popup](https://github.com/jonmbake/screenshots/blob/master/discourse-ldap-auth/ldap_popup.png)
 
+## Submitting a PR
+
+Make sure coding style is maintained and all tests pass by running:
+
+```
+rspec
+```
+
 ## Version History
+
+[0.3.8](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.8)- Fix `enabled?` undefined warning
+
+[0.3.7](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.7)- Add _Attribute to lookup users by_ Setting
+
+[0.3.6](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.6)- Fixed bug where user who changed email can no longer be looked up
 
 [0.3.5](https://github.com/jonmbake/discourse-ldap-auth/tree/v0.3.5)- Updated styling of LDAP login popup
 

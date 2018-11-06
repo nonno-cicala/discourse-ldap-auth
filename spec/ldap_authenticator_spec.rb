@@ -108,4 +108,16 @@ describe LDAPAuthenticator do
       expect(result.user.groups[1]).to eq('engineering_group')
     end
   end
+
+  context 'when SiteSettings.ldap_lookup_users_by is username' do
+    before(:all) do
+      SiteSetting.ldap_user_create_mode = 'auto'
+      SiteSetting.ldap_lookup_users_by = 'username'
+    end
+    it 'will lookup user by username' do
+      expect(@user).to_not receive(:find_by_email)
+      expect(@user).to receive(:find_by_username).with('tester')
+      @auth.after_authenticate(@entry)
+    end
+  end
 end
